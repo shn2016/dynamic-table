@@ -1,3 +1,25 @@
+
+# Introduction
+
+This is the solution for code test [dynamic-table](https://github.com/KieraDOG/dynamic-table-server);
+
+## Installation
+
+```
+git clone
+cd dynamic-table
+npm install
+npm run
+```
+
+
+## Total time taken
+
+
+Started at: 3:35 PM 4 April 2019
+Ended at:
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
