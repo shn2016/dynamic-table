@@ -6,7 +6,7 @@ This is the solution for code test [dynamic-table](https://github.com/KieraDOG/d
 ## Installation
 
 ```
-git clone
+git clone https://github.com/shn2016/dynamic-table
 cd dynamic-table
 npm install
 npm run
@@ -15,9 +15,7 @@ npm run
 
 ## Total time taken
 
-
-Started at: 3:35 PM 4 April 2019
-Ended at:
+Time spent for now: 2hrs ;
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
