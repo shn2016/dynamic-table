@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Sidebar from '../Sidebar';
 import Trades from '../Trades';
 import Withdraws from '../Withdraws';
+import MUITrades from '../MUITrades';
+import MUIWithdraws from '../MUIWithdraws';
 
 const App = styled.div`
   display: grid;
@@ -36,6 +38,16 @@ const DynamicTables = () => (
             exact
             path="/withdraws"
             component={Withdraws}
+          />
+          <Route
+            exact
+            path="/muitrades"
+            component={MUITrades}
+          />
+          <Route
+            exact
+            path="/muiwithdraws"
+            component={MUIWithdraws}
           />
           <Route
             render = {() => (

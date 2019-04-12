@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Side = styled.div`
@@ -55,6 +55,8 @@ const Sidebar = () => (
       <ListItem><Link to="/">Home</Link></ListItem>
       <ListItem><Link to="/trades">Trade</Link></ListItem>
       <ListItem><Link to="/withdraws">Withdraw</Link></ListItem>
+      <ListItem><Link to="/muitrades">MUI-Trade</Link></ListItem>
+      <ListItem><Link to="/muiwithdraws">MUI-Withdraw</Link></ListItem>
     </Menu>
   </Side>
 )
