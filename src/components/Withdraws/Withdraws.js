@@ -1,12 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import DataTable from '../DataTable';
 import Pagination from '../Pagination';
+import getWithdraws from '../../services/getWithdraws';
+import TableAppBar from '../TableAppBar';
+import Filter from '../Filter';
 
 export default class Withdraws extends React.Component {
   constructor(props) {
@@ -17,46 +16,99 @@ export default class Withdraws extends React.Component {
       option: {},
       pagination: {},
       trades: [],
+      search: ['uuid', 'amount', 'bankReferenceNumber'],
+      searcgByRange: 'createdAt',
+      filter: ['status'],
+      optionDirty: false,
+      query: '',
     }
     this.handleChangePage = this.handleChangePage.bind(this);
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+    this.onFilterChange = this.onFilterChange.bind(this);
   }
 
   componentDidMount() {
-    axios.get('https://dynamic-table-server.herokuapp.com/withdraws.json')
-      .then(({data: {withdraws, pagination, option}}) => {
-        const newCol = (withdraws) ? Object.keys(withdraws[0]) : [];
-        console.log(pagination)
+    this.updateStates();
+  }
+
+  updateQuery() {
+    const { option } = this.state;
+    const { status } = option;
+
+    let newQuery = '';
+    status.forEach(obj => {
+      if (Object.values(obj)[0]) {
+        newQuery += `&&filter[status]=${Object.keys(obj)[0]}`;
+      };
+    });
+    console.log(newQuery);
+    this.updateStates(newQuery);
+    this.setState({
+      query: newQuery,
+    })
+  }
+
+  updateStates(query) {
+    getWithdraws(query)
+    .then(({data: {withdraws, pagination, option}}) => {
+      const { optionDirty } = this.state;
+      if (optionDirty) {
         this.setState({
-          pagination,
           withdraws,
-          option,
-          col: newCol,
+          pagination,
         });
-      })
-}
+        return;
+      };
 
-handleChangePage = (event, page) => {
-  const { pagination } = this.state;
-  pagination.number = page + 1;
-  this.setState({ pagination });
-};
+      const newCol = (withdraws) ? Object.keys(withdraws[0]) : [];
+      const newOption = {
+        status: option.status.map(value =>  { const obj = {}; obj[value] = false; return obj;}),
+      };
+      this.setState({
+        pagination,
+        withdraws,
+        option: newOption,
+        col: newCol,
+      });
+    })
+  }
 
-handleChangeRowsPerPage = event => {
-  this.setState({ size: event.target.value });
-};
+  handleChangePage = (event, page) => {
+    const { pagination, query } = this.state;
+    const newQuery = query + `&&pagination[number]=${page+1}&&pagination[size]=${pagination.size}`;
+    this.updateStates(newQuery);
+  };
+
+  handleChangeRowsPerPage = event => {
+    const size = event.target.value;
+    const { query } = this.state;
+    const newQuery = query + `&&pagination[number]=1&&pagination[size]=${size}`;
+
+    this.updateStates(newQuery);
+  };
+
+  onFilterChange(option, group, index) {
+    const key = Object.keys(option[group][index])[0];
+    const value = Object.values(option[group][index])[0];
+    option[group][index][key] = (!value) ? true : false;
+
+    this.setState({
+      option,
+      optionDirty: true,
+    });
+
+    this.updateQuery();
+  }
 
   render() {
     const { col, withdraws, option, pagination} = this.state
     return (
       <div>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" color="inherit">
-              Withdraws
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <TableAppBar tableName="Withdraws" />
+        <Filter 
+            option={option}
+            onFilterChange={this.onFilterChange}
+        />
         <Card >
           <CardContent>
             <DataTable 

@@ -8,8 +8,8 @@ const Pagination = ({ pagination, handleChangeRowsPerPage, handleChangePage }) =
       rowsPerPageOptions={[3, 5, 10, 20]}
       component="div"
       count={total}
-      rowsPerPage={size}
-      page={number-1}
+      rowsPerPage={Number(size)}
+      page={Number(number-1)}
       backIconButtonProps={{
         'aria-label': 'Previous Page',
       }}
