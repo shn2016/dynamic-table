@@ -8,6 +8,34 @@ export default class MUIWithdraws extends React.Component {
 
     this.state = {
       withdraws: [],
+      columns: [
+        {
+          name: "uuid",
+          options: {
+            filter: false,
+          }
+        }, {
+          name: "createdAt", 
+          options: {
+            filter: false,
+          }
+        }, {
+          name: "amount", 
+          options: {
+            filter: false,
+          }
+        }, {
+          name: "status", 
+          options: {
+            filter: true,
+          },
+        }, {
+          name: "bankReferenceNumber", 
+          options: {
+            filter: false,
+          },
+        }
+      ]
     }
   }
 
@@ -21,39 +49,12 @@ export default class MUIWithdraws extends React.Component {
 }
 
   render() {
-    const { withdraws } = this.state
+    const { withdraws, columns } = this.state
     const options = {
       filterType: 'checkbox',
       selectableRows: false,
     };
-    const columns = [
-      {
-        name: "uuid",
-        options: {
-          filter: false,
-        }
-      }, {
-        name: "createdAt", 
-        options: {
-          filter: false,
-        }
-      }, {
-        name: "amount", 
-        options: {
-          filter: false,
-        }
-      }, {
-        name: "status", 
-        options: {
-          filter: true,
-        },
-      }, {
-        name: "bankReferenceNumber", 
-        options: {
-          filter: false,
-        },
-      }
-    ]
+    
     const data = withdraws.map(row => {
       return Object.values(row);
     })

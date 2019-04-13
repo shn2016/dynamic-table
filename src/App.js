@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import Sidebar from '../Sidebar';
-import Trades from '../Trades';
-import Withdraws from '../Withdraws';
-import MUITrades from '../MUITrades';
-import MUIWithdraws from '../MUIWithdraws';
+import Sidebar from './components/Sidebar';
+import Trades from './pages/Trades';
+import Withdraws from './pages/Withdraws';
+import MUITrades from './pages/MUITrades';
+import MUIWithdraws from './pages/MUIWithdraws';
 
 const App = styled.div`
   display: grid;
@@ -58,6 +58,6 @@ const DynamicTables = () => (
       </Content>
     </App>
   </BrowserRouter>
-)
+);
 
 export default DynamicTables;

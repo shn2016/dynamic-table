@@ -12,8 +12,7 @@ const Group = styled(FormGroup)`
   & > .form-label {
     padding: 1rem !important;
   }
-`
-
+`;
 
 const Filter = ({ option, onFilterChange }) => {
   const groups = Object.keys(option);

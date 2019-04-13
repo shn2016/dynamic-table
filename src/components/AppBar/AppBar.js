@@ -18,8 +18,9 @@ const Button = styled(IconButton)`
   &.searchButton {
     right: 4rem;
   }
-`
-const TableAppBar = ({ tableName}) => (
+`;
+
+const EnhancedAppBar = ({ tableName}) => (
   <AppBar position="static">
   <Toolbar>
     <Typography variant="h6" color="inherit">
@@ -30,13 +31,13 @@ const TableAppBar = ({ tableName}) => (
         <FilterListIcon />
       </Button>
     </Tooltip>
-      <Tooltip title="Filter list">
-      <Button aria-label="Filter list" className="searchButton">
+      <Tooltip title="Search list">
+      <Button aria-label="Search list" className="searchButton">
         <SearchIcon />
       </Button>
     </Tooltip>
   </Toolbar>
 </AppBar>
-)
+);
 
-export default TableAppBar;
+export default EnhancedAppBar;

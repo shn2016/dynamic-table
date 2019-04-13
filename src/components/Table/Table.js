@@ -17,7 +17,8 @@ const StyledTable = styled(Table)`
   min-width: 700px;
   width: auto;
 `;
-const DataTable = ({ col=[], data=[]}) => {
+
+const EnhancedTable = ({ col=[], data=[]}) => {
   return (
     <StyledPaper>
       <StyledTable>
@@ -42,9 +43,9 @@ const DataTable = ({ col=[], data=[]}) => {
       </StyledTable>
     </StyledPaper>
   );
-}
+};
 
 
-export default DataTable;
+export default EnhancedTable;
 
 
