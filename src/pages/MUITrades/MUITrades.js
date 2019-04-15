@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MUIDataTable from "mui-datatables";
+import processData from '../../helper/processData';
 
 export default class MUITrades extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class MUITrades extends React.Component {
   componentDidMount() {
     axios.get('https://dynamic-table-server.herokuapp.com/trades.json?pagination[number]=1&&pagination[size]=+Infinity')
     .then(({data: { trades }}) => {
+      processData(trades, 'updatedAt');
       this.setState({
         trades,
       });

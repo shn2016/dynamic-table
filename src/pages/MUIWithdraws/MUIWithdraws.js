@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import MUIDataTable from "mui-datatables";
+import processData from '../../helper/processData';
+
 
 export default class MUIWithdraws extends React.Component {
   constructor(props) {
@@ -42,6 +44,7 @@ export default class MUIWithdraws extends React.Component {
   componentDidMount() {
     axios.get('https://dynamic-table-server.herokuapp.com/withdraws.json?pagination[number]=1&&pagination[size]=+Infinity')
     .then(({data: { withdraws }}) => {
+      processData(withdraws, 'createdAt');
       this.setState({
         withdraws,
       });

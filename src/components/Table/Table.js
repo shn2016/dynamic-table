@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 const StyledPaper = styled(Paper)`
   width: '100%';
-  /* margin-top: 50px; */
   overflow-x: 'auto';
 `;
 
@@ -18,28 +17,38 @@ const StyledTable = styled(Table)`
   width: auto;
 `;
 
-const EnhancedTable = ({ col=[], data=[]}) => {
+const EnhancedTable = ({ columns=[], data=[]}) => {
   return (
     <StyledPaper>
+      
       <StyledTable>
         <TableHead>
           <TableRow>
-            {col.map(cell => (
+            {columns.map(cell => (
               <TableCell key={cell}>{cell}</TableCell>
             ))}
           </TableRow>
         </TableHead>
-        <TableBody>
-          {data.map(row => {
-            return (
-            <TableRow key={row.uuid}>
-              {Object.values(row).map(cell => {
-                const value = (typeof(cell) === 'object') ? cell.symbol : cell;
-                return <TableCell key={cell}>{`${value}`}</TableCell>
-              })}
+        {(data.length===0) 
+          ?
+          (<TableBody>
+            <TableRow >
+              <TableCell colSpan={6} key="noData" align="center">Sorry, there is no data available</TableCell>
             </TableRow>
-          )})}
-        </TableBody>
+          </TableBody>)
+          :
+          <TableBody>
+            {data.map(row => {
+              return (
+              <TableRow key={row.uuid}>
+                {Object.values(row).map(cell => {
+                  const value = (typeof(cell) === 'object') ? cell.symbol : cell;
+                  return <TableCell key={cell}>{`${value}`}</TableCell>
+                })}
+              </TableRow>
+            )})}
+          </TableBody>
+        }
       </StyledTable>
     </StyledPaper>
   );
