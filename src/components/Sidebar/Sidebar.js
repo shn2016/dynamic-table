@@ -55,8 +55,6 @@ const Sidebar = () => (
       <ListItem><Link to="/">Home</Link></ListItem>
       <ListItem><Link to="/trades">Trade</Link></ListItem>
       <ListItem><Link to="/withdraws">Withdraw</Link></ListItem>
-      <ListItem><Link to="/muitrades">MUI-Trade</Link></ListItem>
-      <ListItem><Link to="/muiwithdraws">MUI-Withdraw</Link></ListItem>
     </Menu>
   </Side>
 )

@@ -20,7 +20,6 @@ const StyledTable = styled(Table)`
 const EnhancedTable = ({ columns=[], data=[]}) => {
   return (
     <StyledPaper>
-      
       <StyledTable>
         <TableHead>
           <TableRow>
@@ -42,8 +41,7 @@ const EnhancedTable = ({ columns=[], data=[]}) => {
               return (
               <TableRow key={row.uuid}>
                 {Object.values(row).map(cell => {
-                  const value = (typeof(cell) === 'object') ? cell.symbol : cell;
-                  return <TableCell key={cell}>{`${value}`}</TableCell>
+                  return <TableCell key={cell}>{`${cell}`}</TableCell>
                 })}
               </TableRow>
             )})}

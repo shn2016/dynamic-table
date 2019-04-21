@@ -1,5 +1,4 @@
-import convertDate from "./convertDate";
+import processTrades from './processTrades';
+import processWithdraws from './processWithdraws';
 
-export default (data, key) => (data.forEach(element => {
-  element[key] = convertDate(element[key]);
-}));
+export default (type, data) => ((type === 'trades') ? processTrades(data) : processWithdraws(data));

@@ -28,10 +28,19 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
 
+    const { filter, dateRangeName } = this.props;
+    const lte =  (filter && filter[dateRangeName] && filter[dateRangeName].lte) 
+      ? filter[dateRangeName].lte 
+      : '';
+    const gte =  (filter && filter[dateRangeName] && filter[dateRangeName].gte) 
+      ? filter[dateRangeName].gte 
+      : '';
+
     this.state = {
       display: false,
-      gte: '',
-      lte: '',
+      lte, 
+      gte,
+      inputs: {},
     }
   }
 
@@ -41,42 +50,48 @@ class Search extends React.Component {
     })
   }
 
-  onTextChange(event, search, label) {
-    const { onPropsChange } = this.props;
-    search[label] = event.target.value;
-
-    onPropsChange(search)
-  }
-
-  clearSearch(search) {
-    const { onPropsChange, rangeOption } = this.props;
-    Object.keys(search).forEach(label => search[label]='');
-    for(let object in rangeOption) { delete rangeOption[object]};
+  onInputChange(event, inputs, attribute) {
+    inputs[attribute] = event.target.value;
     this.setState({
-      gte: '',
-      lte: '',
-    }, () => onPropsChange([ search, rangeOption ]))
+      inputs,
+    })
   }
 
-  onSearchRangeClick() {
-    const { onPropsChange, rangeOption } = this.props;
-    const { gte, lte } = this.state;
-    rangeOption.gte = gte;
-    rangeOption.lte = lte;
+  clearSearch() {
+    const search = {};
+    this.setState({
+      inputs: {},
+      lte: '',
+      gte: '',
+    }, () => {
+      this.updateFilter(search);
+    });
+  }
 
-    onPropsChange(rangeOption);
+  onSearchClick() {
+    const { dateRangeName } = this.props;
+    const { gte, lte, inputs } = this.state;
+    const search =Object.assign({[dateRangeName]: {lte, gte}}, inputs);
+    
+    this.updateFilter(search);
+  }
+
+  updateFilter(search) {
+    const { filter, onPropsChange } = this.props;
+    for(let key in filter) delete filter[key];
+    const newFilter = Object.assign(filter, search);
+    onPropsChange(newFilter);
   }
 
   displaySearch(display) {
     this.setState({
       display: !display,
-    })
+    });
   }
-  render() {
-    const { options } = this.props;
-    const { gte, lte, display } = this.state;
-    const labels = Object.keys(options);
 
+  render() {
+    const { attributes } = this.props;
+    const { lte, gte, display, inputs } = this.state;
     return (
       <div>
         <Tooltip title="Search list">
@@ -91,27 +106,19 @@ class Search extends React.Component {
         {display 
           && (
           <Form>
-            {labels.map(label=> {
+            {attributes.map(attribute=> {
               return (
                 <TextField
-                  label={label}
-                  placeholder={label}
-                  key={label}
+                  label={attribute}
+                  placeholder={attribute}
+                  key={attribute}
                   margin="normal"
                   type="search"
-                  value={options[label]}
-                  onChange={(event) => this.onTextChange(event, options, label)}
+                  value={inputs[attribute] || ""}
+                  onChange={(event) => this.onInputChange(event, inputs, attribute)}
                 />
               )
             })}
-            <Tooltip title="Clear Search">
-              <Button 
-                variant="contained" 
-                onClick={() => this.clearSearch(options)}
-              >
-                Clear
-              </Button>
-            </Tooltip>
           </Form>)}
           { display 
           && (
@@ -140,9 +147,17 @@ class Search extends React.Component {
               <Button 
                 variant="contained" 
                 color="primary"
-                onClick={() => this.onSearchRangeClick()}
+                onClick={() => this.onSearchClick()}
               >
-                Search Date Range
+                Search
+              </Button>
+            </Tooltip>
+            <Tooltip title="Clear Search">
+              <Button 
+                variant="contained" 
+                onClick={() => this.clearSearch()}
+              >
+                Clear
               </Button>
             </Tooltip>
           </Form>
