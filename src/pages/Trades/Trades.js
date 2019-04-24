@@ -11,7 +11,6 @@ const filterOptions = ['tradingPair.symbol', 'side'];
    
 const Trades = () => (
   <TablePage 
-    tableName="Trades Table"
     type="trades"
     columns={columns}
     searchAttributes={searchAttributes}

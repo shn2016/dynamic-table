@@ -1,17 +1,20 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import qs from 'qs';
+import styled from 'styled-components';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Pagination from '../Pagination';
-import Table from '../Table';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import styled from 'styled-components';
 import getData from '../../services/getData';
 import processData from '../../helper/processData';
+import parseStringToNumber from '../../helper/parseStringToNumber';
 import Search from '../Search';
 import Option from '../Option';
+import Table from '../Table';
+import Pagination from '../Pagination';
 
 const ProgressWrapper = styled.div`
   display: flex;
@@ -23,7 +26,6 @@ class TablePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // filter incldues searchInput, dateRange and option
       data: [],
       isLoading: true,
       pagination: {},
@@ -35,22 +37,37 @@ class TablePage extends React.Component {
   }
 
   componentDidMount() {
-    this.updateState();
+    const { location } = this.props;
+    const params = qs.parse(location.search.slice(1));
+    const newPagination = (!params.pagination) ? {} : parseStringToNumber(params.pagination);
+    const newFilter = (!params.filter) ? {} : params.filter;
+
+    this.setState({
+      pagination: newPagination,
+      filter: newFilter,
+    }, () => this.updateState());
+  }
+
+  updateHistory() {
+    const { type, history } = this.props;
+    const { filter, pagination } = this.state;
+    const params = { filter, pagination };
+    
+    history.push(`/${type}?${qs.stringify(params)}`);
   }
 
   updateState() {
     const { type } = this.props;
     const { filter, pagination } = this.state;
+
     getData(type, filter, pagination)
       .then(({data}) => {
-        console.log(data);
-
         this.setState({
           data: processData(type, data[type]),
           pagination: data.pagination,
           option: data.option,
           isLoading: false,
-        })
+        }, () => this.updateHistory());
       });
   }
 
@@ -65,11 +82,11 @@ class TablePage extends React.Component {
 
   render() {
     const { 
-      tableName,
+      type,
       columns,
       searchDateRange,
       searchAttributes,
-      filterOptions
+      filterOptions,
     } = this.props;
 
     const {
@@ -83,8 +100,8 @@ class TablePage extends React.Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit">
-              {tableName}
+            <Typography variant="h6" color="inherit" >
+              {`${type} Table`}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -100,6 +117,7 @@ class TablePage extends React.Component {
                 filter={filter}
                 option={option}
                 onPropsChange={this.onStateChange}
+                pageType={type}
                 filterOptions={filterOptions}
               />
               {(isLoading)
@@ -123,4 +141,4 @@ class TablePage extends React.Component {
     )
   };
 }
-export default TablePage;
+export default withRouter(TablePage);

@@ -1,7 +1,7 @@
 import React from 'react';
 import TablePage from '../../components/TablePage';
 
-const columns = ['uuid', 'create at', 'amount', 'status', 'bank reference Number'];
+const columns = ['uuid', 'create at', 'amount', 'status', 'bank reference number'];
 
 const searchAttributes = ['uuid', 'amount', 'bankReferenceNumber'];
 
@@ -11,7 +11,6 @@ const filterOptions = ['status'];
 
 const Withdraws = () => (
   <TablePage 
-    tableName="Withdraws Table"
     type="withdraws"
     columns={columns}
     searchAttributes={searchAttributes}

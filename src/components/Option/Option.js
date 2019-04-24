@@ -39,13 +39,13 @@ class Option extends React.Component {
   }
 
   handleCheckbox(subObjects, checkboxLabel) {
-    const { filter } = this.props;
-    return checkFilterOption(subObjects, checkboxLabel, filter);
+    const { filter, pageType } = this.props;
+    return checkFilterOption(subObjects, checkboxLabel, filter, pageType);
   }
 
   onOptionChange(subObjects, checkboxLabel) {
-    const { onPropsChange, filter } = this.props;
-    handleFilterOption(subObjects, checkboxLabel, filter);
+    const { onPropsChange, filter, pageType } = this.props;
+    handleFilterOption(subObjects, checkboxLabel, filter, pageType);
     onPropsChange(filter);
   }
 
