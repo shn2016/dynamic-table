@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-dynamic-table/precache-manifest.050e190f89566b36abfe59d9393760bd.js"
+  "/dynamic-table/precache-manifest.57d5ce1ba48d6efde8da354289cfb62d.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/react-dynamic-table/index.html", {
+workbox.routing.registerNavigationRoute("/dynamic-table/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

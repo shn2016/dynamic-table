@@ -1,14 +1,14 @@
 {
-  "main.css": "/react-dynamic-table/static/css/main.e50737d0.chunk.css",
-  "main.js": "/react-dynamic-table/static/js/main.b52a8693.chunk.js",
-  "main.js.map": "/react-dynamic-table/static/js/main.b52a8693.chunk.js.map",
-  "runtime~main.js": "/react-dynamic-table/static/js/runtime~main.2967cea9.js",
-  "runtime~main.js.map": "/react-dynamic-table/static/js/runtime~main.2967cea9.js.map",
-  "static/js/2.73908186.chunk.js": "/react-dynamic-table/static/js/2.73908186.chunk.js",
-  "static/js/2.73908186.chunk.js.map": "/react-dynamic-table/static/js/2.73908186.chunk.js.map",
-  "index.html": "/react-dynamic-table/index.html",
-  "precache-manifest.050e190f89566b36abfe59d9393760bd.js": "/react-dynamic-table/precache-manifest.050e190f89566b36abfe59d9393760bd.js",
-  "service-worker.js": "/react-dynamic-table/service-worker.js",
-  "static/css/main.e50737d0.chunk.css.map": "/react-dynamic-table/static/css/main.e50737d0.chunk.css.map",
-  "static/media/README.md": "/react-dynamic-table/static/media/README.317c6561.md"
+  "main.css": "/dynamic-table/static/css/main.e50737d0.chunk.css",
+  "main.js": "/dynamic-table/static/js/main.9a5643e8.chunk.js",
+  "main.js.map": "/dynamic-table/static/js/main.9a5643e8.chunk.js.map",
+  "runtime~main.js": "/dynamic-table/static/js/runtime~main.3aaefdb1.js",
+  "runtime~main.js.map": "/dynamic-table/static/js/runtime~main.3aaefdb1.js.map",
+  "static/js/2.1805fdd7.chunk.js": "/dynamic-table/static/js/2.1805fdd7.chunk.js",
+  "static/js/2.1805fdd7.chunk.js.map": "/dynamic-table/static/js/2.1805fdd7.chunk.js.map",
+  "index.html": "/dynamic-table/index.html",
+  "precache-manifest.57d5ce1ba48d6efde8da354289cfb62d.js": "/dynamic-table/precache-manifest.57d5ce1ba48d6efde8da354289cfb62d.js",
+  "service-worker.js": "/dynamic-table/service-worker.js",
+  "static/css/main.e50737d0.chunk.css.map": "/dynamic-table/static/css/main.e50737d0.chunk.css.map",
+  "static/media/README.md": "/dynamic-table/static/media/README.317c6561.md"
 }
