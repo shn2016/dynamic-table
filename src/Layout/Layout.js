@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter} from 'react-router-dom';
+import { HashRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
 const App = styled.div`
@@ -15,14 +15,14 @@ const Content = styled.div`
 
 
 const Layout = ({ Sidebar, children}) => (
-  <BrowserRouter>
+  <HashRouter>
     <App>
       <Sidebar />
       <Content>
         {children}
       </Content>
     </App>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 export default Layout;

@@ -1,7 +1,7 @@
 
 # Introduction
 
-This is the solution for code test [dynamic-table](https://github.com/KieraDOG/dynamic-table-server); and here is the [`demo`](https://react-dynamic-table.herokuapp.com/)
+This is the solution for code test [dynamic-table](https://github.com/KieraDOG/dynamic-table-server); and you can check the demo on [heroku](https://react-dynamic-table.herokuapp.com/) or [gh-pages](https://shn2016.github.io/dynamic-table/) .
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm start
 * Styled Component, Material UI
 * axios
 * Create React App
-* Depolyed on [Heroku](https://react-dynamic-table.herokuapp.com/)
+* Depolyed on [Heroku](https://react-dynamic-table.herokuapp.com/), [gh-pages](https://shn2016.github.io/dynamic-table/)
 
 ## Function
 
@@ -30,7 +30,7 @@ npm start
 5. Loading process available;
 6. No data indicator;
 7. Pagination;
-8. Another two page using mui-datatable;
+8. Persistence while refreshing page;
 
 ## About Me
 
